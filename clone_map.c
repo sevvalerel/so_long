@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:54 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/10 20:44:23 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:40:40 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 char	**clonemap(t_game *game)
 {
 	int		i;
-	char	**clone;
+	char	**clone=NULL;
 
 	i = 0;
 	clone = malloc(sizeof(char *) * (game->map_y + 1));
-	if (!clone)
+	 if (!clone)
 		error("malloc error", game, 1);
 	while (i < game->map_y)
 	{

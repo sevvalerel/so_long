@@ -1,12 +1,16 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 # include <fcntl.h>
 #include "minilibx-linux/mlx.h"
-typedef struct s_game
+
+
+typedef struct game
 {
     void *mlx;
     void *win;
@@ -25,19 +29,27 @@ typedef struct s_game
     int coin;
     int exit;
     int error;
+    void *player;
+    void *wall;
+    void *coin_c;
+    void *floor;
+    void *exit_m;
 
-} t_game;
+}   t_game;
 
-void	read_map(char *folder, t_game *game)
+void	read_map(char *folder, t_game *game);
 int error(char *message, t_game *game, int free_check);
 int load_map(char *map_file, t_game *game);
 int initialize_mlx(t_game *game);
-void game_loop(t_game *game);
+int game_loop(t_game *game);
 void cleanup_game(t_game *game);
 int key_hook(int keycode, t_game *game);
 char	**clonemap(t_game *game);
 void	free_map(t_game *game);
 void	free_clone(char **map_clone, int map_y);
 int map_check(t_game *game);
+void	map_import_window(t_game *game, int x, int y);
+void images(t_game *game);
+char	*ft_strdup(const char *s1);
 
 #endif

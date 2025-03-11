@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:02:36 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/10 20:46:43 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/11 12:04:17 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int flood(int x, int y, char **map, t_game *game)
     {
         return (1);
     }
-    return 0;
+    return (0);
 }
