@@ -10,8 +10,6 @@
 #include "minilibx-linux/mlx.h"
 #include "ft_printf/ft_printf.h"
 #include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
-
 
 typedef struct game
 {
@@ -50,7 +48,7 @@ int initialize_mlx(t_game *game);
 int game_loop(t_game *game);
 void cleanup_game(t_game *game);
 int key_hook(int keycode, t_game *game);
-char	**clonemap(t_game *game);
+void	clonemap(t_game *game);
 void	free_map(t_game *game);
 void	free_clone(char **map_clone, int map_y);
 int map_check(t_game *game);
@@ -59,6 +57,7 @@ void images(t_game *game);
 void free_map_clone(t_game *game);
 int flood_a(int x, int y, char **map, t_game *game);
 void	map(char *folder, t_game *game);
+void line_map(char *folder, t_game *game);
 
 
 #endif

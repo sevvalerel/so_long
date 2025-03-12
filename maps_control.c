@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:02:36 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 15:50:34 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:11:05 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,30 @@ void read_map(char *folder, t_game *game)
     fd = open(folder, O_RDONLY);
     if (fd == -1)
         error("error, can't open file", game, 0);
+    game->map=malloc(sizeof(char*)*(game->map_y+1));
     line = get_next_line(fd);
-    ft_printf("%s",line);
+    while (line)
+    {
+        game->map[y]=ft_strdup(line);
+        free(line);
+        y++;
+        line = get_next_line(fd);
+    }
+    clonemap(game);
+    free(line);
+    close(fd);
+}
+void line_map(char *folder, t_game *game)
+{
+    int y;
+    int fd;
+    char *line;
+
+    y = 0;
+    fd = open(folder, O_RDONLY);
+    if (fd == -1)
+        error("error, can't open file", game, 0);
+    line = get_next_line(fd);
     while (line)
     {
         free(line);

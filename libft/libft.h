@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:56:59 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 14:46:07 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:44:13 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*get_next_line(int fd);
 
 #endif

@@ -1,8 +1,7 @@
 NAME = so_long
 CC = cc
 
-SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-      main.c clone_map.c error.c images_file.c maps_control.c
+SRC = main.c clone_map.c error.c images_file.c maps_control.c
 
 OBJ = $(SRC:.c=.o)
 

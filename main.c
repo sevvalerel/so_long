@@ -6,12 +6,11 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 17:43:56 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 15:53:06 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:21:38 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h> // memset için gerekli
 
 int game_loop(t_game *game)
 {
@@ -31,6 +30,7 @@ int main(int argc, char **argv)
         error("Wrong argument, please select map.", &game, 0);
 
     map_check(&game);
+    
 
     game.mlx = mlx_init();
     if (!game.mlx)

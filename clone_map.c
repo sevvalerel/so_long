@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:54 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 16:13:15 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:14:35 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,24 @@ void	objects(char object, t_game *game, int p_y, int p_x)
 	 else if (object != '0' && object != '1' && object != '\n' && object != '\0')
 	 	game->error++;
 }
-char	**clonemap(t_game *game)
+void	clonemap(t_game *game)
 {
 	int		i;
-	char	**clone=NULL;
 
 	i = 0;
-	clone = malloc(sizeof(char *) * (game->map_y + 1));
-	 if (!clone)
+	game->map_clone= malloc(sizeof(char *) * (game->map_y + 1));
+	 if (!game->map_clone)
 		error("malloc error", game, 1);
+	
 	while (i < game->map_y)
 	{
-		clone[i] = ft_strdup(game->map[i]);
+		game->map_clone[i] = ft_strdup(game->map[i]);
 		i++;
 	}
-	clone[i] = NULL;
-	return (clone);
+	game->map_clone[i] = NULL;
+	//ft_printf("%s",game->map_clone[0]);
+	//ft_printf("%s",game->map_clone[1]);
+	
 }
 char	**fullmap_import(char *folder, char **fullmap, t_game *game)
 {
@@ -87,7 +89,12 @@ void	map(char *folder, t_game *game)
 	game->move = 0;
 	if (folder[folder_check - 4] == '.' && folder[folder_check - 3] == 'b'
 		&& folder[folder_check - 2] == 'e' && folder[folder_check - 1] == 'r')
+	{
+		line_map(folder,game);
 		read_map(folder, game);
+		
+	}
+		
 	else
 		error("file extension is wrong", game, 0);
 	fullmap = malloc(sizeof(char *) * game->map_y);
