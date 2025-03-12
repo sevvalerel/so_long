@@ -6,11 +6,30 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:54 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/11 15:40:40 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:13:15 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+void	objects(char object, t_game *game, int p_y, int p_x)
+{
+	if (object == 'P')
+	{
+		game->player_c++;
+		game->player_x = p_x;
+		game->player_y = p_y;
+	}
+	else if (object == 'C')
+		game->coin++;
+	 else if (object == 'E')
+	{
+	 	game->exit++;
+	 	game->exit_x = p_x + 1;
+	 	game->exit_y = p_y + 1;
+	 }
+	 else if (object != '0' && object != '1' && object != '\n' && object != '\0')
+	 	game->error++;
+}
 char	**clonemap(t_game *game)
 {
 	int		i;
@@ -28,34 +47,58 @@ char	**clonemap(t_game *game)
 	clone[i] = NULL;
 	return (clone);
 }
-
-void	free_map(t_game *game)
+char	**fullmap_import(char *folder, char **fullmap, t_game *game)
 {
-	int	i;
+	int		fd;
+	char	*line;
+	int		i;
+	int		p_y;
 
-	if (!game || !game->map)
-		return ;
-	i = 0;
-	while (i < game->map_y)
+	p_y = 0;
+	fd = open(folder, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		free(game->map[i]);
-		i++;
+		fullmap[p_y] = ft_strdup(line);
+		i = 0;
+		while (line[i] != '\0')
+		{
+			objects(line[i], game, p_y, i);
+			i++;
+		}
+		free(line);
+		p_y++;
+		line = get_next_line(fd);
 	}
-	free(game->map);
-	game->map = NULL;
+	close(fd);
+	free(line);
+	return (fullmap);
 }
-void	free_clone(char **map_clone, int map_y)
+
+void	map(char *folder, t_game *game)
 {
-	int	i;
+	char	**fullmap;
+	int		folder_check;
 
-	if (!map_clone)
-		return ;
-	i = 0;
-	while (i < map_y)
+	folder_check = ft_strlen(folder);
+	game->error = 0;
+	game->exit = 0;
+	game->coin = 0;
+	game->move = 0;
+	if (folder[folder_check - 4] == '.' && folder[folder_check - 3] == 'b'
+		&& folder[folder_check - 2] == 'e' && folder[folder_check - 1] == 'r')
+		read_map(folder, game);
+	else
+		error("file extension is wrong", game, 0);
+	fullmap = malloc(sizeof(char *) * game->map_y);
+	if (fullmap == NULL)
+		error("memory error", game, 0);
+	game->map = fullmap_import(folder, fullmap, game);
+	if (game->map[0] == NULL)
 	{
-		if (map_clone[i])
-			free(map_clone[i]);
-		i++;
+		free(fullmap);
+		error("map import error", game, 0);
 	}
-	free(map_clone);
+	game->map_x = ft_strlen(game->map[0]) - 1;
 }
+

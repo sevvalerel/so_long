@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:29:58 by buket             #+#    #+#             */
-/*   Updated: 2024/11/27 12:28:06 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:09:43 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include "libft/libft.h"
 
 char	*get_next_line(int fd);
 char	*get_new(char *buffer);
 char	*f_read(int fd, char *buffer);
-size_t	ft_strlen(char *x);
 int		new_check(const char *s);
 char	*f_swap(char *buffer);
-char	*ft_strjoin(char *line, char *buff);
 
 #endif

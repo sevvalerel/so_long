@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 17:43:56 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/11 15:21:56 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:53:06 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int main(int argc, char **argv)
 {
     t_game game;
 
-    memset(&game, 0, sizeof(t_game)); // ft_memset yerine memset kullanıldı
+    ft_memset(&game, 0, sizeof(t_game)); // ft_memset yerine memset kullanıldı
 
     if (argc == 2)
-        load_map(argv[1], &game); // map() yerine load_map() kullanıldı
+        map(argv[1], &game); // map() yerine load_map() kullanıldı
     else
         error("Wrong argument, please select map.", &game, 0);
 

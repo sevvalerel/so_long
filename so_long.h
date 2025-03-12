@@ -6,8 +6,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-# include <fcntl.h>
+#include <fcntl.h>
 #include "minilibx-linux/mlx.h"
+#include "ft_printf/ft_printf.h"
+#include "libft/libft.h"
+#include "get_next_line/get_next_line.h"
 
 
 typedef struct game
@@ -34,6 +37,9 @@ typedef struct game
     void *coin_c;
     void *floor;
     void *exit_m;
+    int move;
+    int exit_y;
+    int exit_x;
 
 }   t_game;
 
@@ -50,6 +56,9 @@ void	free_clone(char **map_clone, int map_y);
 int map_check(t_game *game);
 void	map_import_window(t_game *game, int x, int y);
 void images(t_game *game);
-char	*ft_strdup(const char *s1);
+void free_map_clone(t_game *game);
+int flood_a(int x, int y, char **map, t_game *game);
+void	map(char *folder, t_game *game);
+
 
 #endif

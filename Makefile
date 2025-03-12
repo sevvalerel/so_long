@@ -1,7 +1,8 @@
 NAME = so_long
-CC = gcc
+CC = cc
 
-SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c main.c clone_map.c error.c images_file.c maps_control.c
+SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+      main.c clone_map.c error.c images_file.c maps_control.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -12,11 +13,11 @@ LIBFT_LIB = libft/libft.a
 MINILIB_LINUX = minilibx-linux/libmlx_Linux.a 
 
 LDFLAGS = -Lminilibx-linux -Lft_printf -Llibft -lmlx -lX11 -lXext -lm
-LDLIBS = $(FT_PRINTF_LIB) $(LIBFT_LIB) $(MINILIB_LINUX) 
+LDLIBS = $(FT_PRINTF_LIB) $(LIBFT_LIB) $(MINILIB_LINUX)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LDLIBS) 
+$(NAME): $(OBJ) $(FT_PRINTF_LIB) $(LIBFT_LIB) $(MINILIB_LINUX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS) $(LDLIBS)
 
 $(FT_PRINTF_LIB):

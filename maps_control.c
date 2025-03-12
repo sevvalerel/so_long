@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:02:36 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/11 12:04:17 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:50:34 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int map_check(t_game *game)
         error("ERROR!,Numbers of players is not 1", game, 1);
     if (game->exit != 1)
         error("ERROR!,No Exit", game, 1);
-    if(flood(game->player_c,game->player_y,game->map_clone,game)==0)
+    if(flood_a(game->player_c,game->player_y,game->map_clone,game)==0)
         return(error("Error, exit or coin path is closed",game,1));
-    free_clone(game->map_clone, game->map_y);
+    free_map_clone( game);
+    return 0;
 }
 
 void check_wall(t_game *game)
@@ -62,11 +63,13 @@ void read_map(char *folder, t_game *game)
     if (fd == -1)
         error("error, can't open file", game, 0);
     line = get_next_line(fd);
-    while (line != NULL)
+    ft_printf("%s",line);
+    while (line)
     {
         free(line);
         y++;
         line = get_next_line(fd);
+        
     }
     free(line);
     close(fd);
@@ -76,7 +79,7 @@ void read_map(char *folder, t_game *game)
         error("Map file is empty", game, 0);
     }
 }
-int flood(int x, int y, char **map, t_game *game)
+int flood_a(int x, int y, char **map, t_game *game)
 {
     if (x < 0 || y < 0 || x >= game->map_x || y >= game->map_y || map[y][x] == '\0' || map[y][x] == '1' || map[y][x] == 'S' || map[y][x] == '\n')
         return (0);
@@ -88,7 +91,7 @@ int flood(int x, int y, char **map, t_game *game)
     if (map[y][x] == 'E')
         game->exit--;
     map[y][x] = 'S';
-    if (flood(x + 1, y, map, game) || flood(x - 1, y, map, game) || flood(x, y + 1, map, game) || flood(x, y - 1, map, game))
+    if (flood_a(x + 1, y, map, game) || flood_a(x - 1, y, map, game) || flood_a(x, y + 1, map, game) || flood_a(x, y - 1, map, game))
     {
         return (1);
     }
