@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 18:30:03 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/14 09:48:07 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/14 10:58:17 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,52 +23,52 @@ void	win(t_game *game)
 	close_game(game);
 }
 
-void move_up(t_game *game)
+void	move_up(t_game *game)
 {
-    if(game->map[game->player_y-1][game->player_x]=='C')
-        game->coin--;
-    else if(game->map[game->player_y-1][game->player_x]=='E')
-    {
-        if(game->coin==0)
-        {
-            game->map[game->player_y][game->player_x] = '0';
-            win(game);
-        }
-        else 
-            return ;
-    }
-    if (game->map[game->player_y - 1][game->player_x] != '1')
-    {
-        game->map[game->player_y][game->player_x]='0';
-        game->map[game->player_y - 1][game->player_x]='P';
-        game->move +=1;
-        game->player_y--;
-    }
-    
+	if (game->map[game->player_y - 1][game->player_x] == 'C')
+		game->coin--;
+	else if (game->map[game->player_y - 1][game->player_x] == 'E')
+	{
+		if (game->coin == 0)
+		{
+			game->map[game->player_y][game->player_x] = '0';
+			win(game);
+		}
+		else
+			return ;
+	}
+	if (game->map[game->player_y - 1][game->player_x] != '1')
+	{
+		game->map[game->player_y][game->player_x] = '0';
+		game->map[game->player_y - 1][game->player_x] = 'P';
+		game->move += 1;
+		game->player_y--;
+	}
 }
-void move_down(t_game *game)
+
+void	move_down(t_game *game)
 {
-    if(game->map[game->player_y+1][game->player_x]=='C')
-        game->coin--;
-    else if(game->map[game->player_y+1][game->player_x]=='E')
-    {
-        if(game->coin==0)
-        {
-            game->map[game->player_y][game->player_x] = '0';
-            win(game);
-        }
-        else 
-            return ;
-    }
-    if (game->map[game->player_y + 1][game->player_x] != '1')
-    {
-        game->map[game->player_y][game->player_x]='0';
-        game->map[game->player_y + 1][game->player_x]='P';
-        game->move +=1;
-        game->player_y++;
-    }
-    
+	if (game->map[game->player_y + 1][game->player_x] == 'C')
+		game->coin--;
+	else if (game->map[game->player_y + 1][game->player_x] == 'E')
+	{
+		if (game->coin == 0)
+		{
+			game->map[game->player_y][game->player_x] = '0';
+			win(game);
+		}
+		else
+			return ;
+	}
+	if (game->map[game->player_y + 1][game->player_x] != '1')
+	{
+		game->map[game->player_y][game->player_x] = '0';
+		game->map[game->player_y + 1][game->player_x] = 'P';
+		game->move += 1;
+		game->player_y++;
+	}
 }
+
 void	move_left(t_game *game)
 {
 	if (game->map[game->player_y][game->player_x - 1] == 'C')
@@ -91,6 +91,7 @@ void	move_left(t_game *game)
 		game->move += 1;
 	}
 }
+
 void	move_right(t_game *game)
 {
 	if (game->map[game->player_y][game->player_x + 1] == 'C')
