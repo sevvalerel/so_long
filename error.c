@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:56:44 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 14:54:20 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/14 02:33:21 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,21 @@ void free_map_clone(t_game *game)
     int i;
 
     if (!game->map_clone)
-        return ;
+        return;
     i = 0;
     while (i < game->map_y)
     {
-        if(game->map_clone[i])
+        if (game->map_clone[i])
+        {
             free(game->map_clone[i]);
+            game->map_clone[i] = NULL;
+        }
         i++;
     }
     free(game->map_clone);
-
+    game->map_clone = NULL;  // Ana pointer'ı da NULL yap
 }
+
 int error(char *message, t_game *game, int free_check)
 {
     ft_printf("Error: %s\n", message);
@@ -56,6 +60,7 @@ int error(char *message, t_game *game, int free_check)
         if (game->map_clone)
             free_map_clone(game);
     }
+    free_images(game);
     exit(EXIT_FAILURE);
     
 }

@@ -2,6 +2,15 @@
     "files.associations": {
         "so_long.h": "c",
         "ft_printf.h": "c",
-        "get_next_line.h": "c"
+        "get_next_line.h": "c",
+        "functional": "c",
+        "tuple": "c",
+        "ranges": "c",
+        "optional": "c",
+        "memory": "c",
+        "iosfwd": "c",
+        "span": "c",
+        "system_error": "c",
+        "typeinfo": "c"
     }
 }

@@ -6,11 +6,26 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 17:43:56 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 18:21:38 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/14 02:23:32 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int close_game(t_game *game)
+{
+    if(game->win !=NULL)
+        mlx_destroy_window(game->mlx,game->win);
+    free_images(game);
+    if(game->mlx !=NULL)
+    {
+        mlx_destroy_display(game->mlx);
+        free(game->mlx);
+    }
+    free_map(game);
+    free_map_clone(game);// 2 kere freelemiş olabilirim ıdk
+    exit(0);
+}
 
 int game_loop(t_game *game)
 {
@@ -22,16 +37,14 @@ int main(int argc, char **argv)
 {
     t_game game;
 
-    ft_memset(&game, 0, sizeof(t_game)); // ft_memset yerine memset kullanıldı
+    ft_memset(&game, 0, sizeof(t_game));
 
     if (argc == 2)
-        map(argv[1], &game); // map() yerine load_map() kullanıldı
+        map(argv[1], &game);
     else
         error("Wrong argument, please select map.", &game, 0);
 
     map_check(&game);
-    
-
     game.mlx = mlx_init();
     if (!game.mlx)
         error("Failed to initialize MinilibX.\n", &game, 1);
@@ -41,13 +54,9 @@ int main(int argc, char **argv)
         error("Failed to create window", &game, 1);
 
     images(&game);
-
-    // Event hooks
-
-   
-    mlx_loop_hook(game.mlx, game_loop, &game); // Oyun döngüsü
-
-    mlx_loop(game.mlx); // Sonsuz döngü
-
+    mlx_hook(game.win, 17, 0, close_game, &game);
+	mlx_hook(game.win, 2, 1L << 0, key, &game);
+    mlx_loop_hook(game.mlx, game_loop, &game);
+    mlx_loop(game.mlx);
     return (0);
 }

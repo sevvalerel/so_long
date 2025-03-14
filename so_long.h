@@ -58,6 +58,12 @@ void free_map_clone(t_game *game);
 int flood_a(int x, int y, char **map, t_game *game);
 void	map(char *folder, t_game *game);
 void line_map(char *folder, t_game *game);
+void check_wall(t_game *game);
+int	key(int keycode, t_game *game);
+void handle_element(char object, t_game *game, int first_y, int first_x);
+int close_game(t_game *game);
+void	free_images(t_game *game);
+
 
 
 #endif

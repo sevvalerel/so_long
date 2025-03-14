@@ -1,7 +1,7 @@
 NAME = so_long
 CC = cc
 
-SRC = main.c clone_map.c error.c images_file.c maps_control.c
+SRC = main.c clone_map.c error.c images_file.c maps_control.c move.c free.c
 
 OBJ = $(SRC:.c=.o)
 
