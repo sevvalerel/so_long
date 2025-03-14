@@ -38,6 +38,7 @@ typedef struct game
     int move;
     int exit_y;
     int exit_x;
+    int exit_reachable;
 
 }   t_game;
 

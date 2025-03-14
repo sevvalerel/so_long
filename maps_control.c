@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:02:36 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/14 02:36:28 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/14 09:50:28 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,29 @@ int map_check(t_game *game)
 {
     int	coin;
 	coin = game->coin;
+    game->exit_reachable = 0; 
+    
     if (game->coin < 1)
         error("No Coin", game, 1);
     if (game->player_c != 1)
         error("Numbers of players is not 1", game, 1);
     if (game->exit != 1)
-        error("No Exit", game, 1);
+        error("Numbers of Exit is not 1", game, 1);
+
     check_wall(game);
-    if(flood_a(game->player_c,game->player_y,game->map_clone,game)==0)
-        return(error("Exit or coin path is closed",game,1));
-    free_map_clone( game);
+
+    if (flood_a(game->player_x, game->player_y, game->map_clone, game) == 0 || game->exit_reachable == 0)
+    {
+        return error("Exit or coin path is closed", game, 1);
+    }
+    if (game->coin > 0)
+        return error("Not all coins are collectible", game, 1);
+    free_map_clone(game);
     game->coin = coin;
     return 0;
 }
+
+
 
 void	check_wall(t_game *game)
 {
@@ -114,24 +124,28 @@ void line_map(char *folder, t_game *game)
         error("Map file is empty", game, 0);
     }
 }
-int flood_a(int x, int y, char **map, t_game *game)
+int	flood_a(int x, int y, char **map, t_game *game)
 {
-    if (x < 0 || y < 0 || x >= game->map_x || y >= game->map_y || map[y][x] == '\0' || map[y][x] == '1' || map[y][x] == 'S' || map[y][x] == '\n')
-        return (0);
+	if (x < 0 || y < 0 || x >= game->map_x || y >= game->map_y
+		|| map[y][x] == '\0' || map[y][x] == '1' || map[y][x] == 'S'
+		|| map[y][x] == '\n')
+		return (0);
+	
+	if (map[y][x] == 'C')
+		game->coin--;  
 
-    if (game->coin == 0 && game->exit == 0)
-        return (1);
-    if (map[y][x] == 'C')
-    {
-        game->coin--;
-    }
-        
-    if (map[y][x] == 'E')
-        game->exit--;
-    map[y][x] = 'S';
-    if (flood_a(x + 1, y, map, game) || flood_a(x - 1, y, map, game) || flood_a(x, y + 1, map, game) || flood_a(x, y - 1, map, game))
-    {
-        return (1);
-    }
-    return (0);
+	if (map[y][x] == 'E')
+	{
+		game->exit_reachable = 1; 
+		return (1);
+	}
+
+	map[y][x] = 'S';
+	flood_a(x + 1, y, map, game);
+	flood_a(x - 1, y, map, game);
+	flood_a(x, y + 1, map, game);
+	flood_a(x, y - 1, map, game);
+
+	return (game->exit_reachable); 
 }
+

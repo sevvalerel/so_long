@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 18:30:03 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/14 02:11:13 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/14 09:48:07 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	win(t_game *game)
 {
-	ft_printf("You are WİN *\n");
+	ft_printf("🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉\n");
+	ft_printf("                                               \n");
+	ft_printf("               🎊 You are WİN 🎊               \n");
+	ft_printf("🔥 Just in time! You got here before the tea got cold!\n");
+	ft_printf("                                               \n");
+	ft_printf("🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉\n");
 	close_game(game);
 }
 
