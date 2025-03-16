@@ -6,7 +6,7 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:10:25 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/12 16:47:33 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/16 13:55:48 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*f_read(int fd, char *buffer)
 			return (NULL);
 		}
 		line[read_byte] = '\0';
-		buffer = ft_strjoin_modified(buffer, line);
+		buffer = ft_strjoin_modif(buffer, line);
 	}
 	free(line);
 	return (buffer);
@@ -79,7 +79,7 @@ char	*get_new(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = (char *)malloc(ft_strlen_modified(buffer) - i + 1);
+	line = (char *)malloc(ft_strlen_modif(buffer) - i + 1);
 	if (!line)
 		return (NULL);
 	i++;

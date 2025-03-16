@@ -6,22 +6,11 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 18:30:03 by seerel            #+#    #+#             */
-/*   Updated: 2025/03/14 10:58:17 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/16 20:27:32 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	win(t_game *game)
-{
-	ft_printf("🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉\n");
-	ft_printf("                                               \n");
-	ft_printf("               🎊 You are WİN 🎊               \n");
-	ft_printf("🔥 Just in time! You got here before the tea got cold!\n");
-	ft_printf("                                               \n");
-	ft_printf("🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉\n");
-	close_game(game);
-}
 
 void	move_up(t_game *game)
 {

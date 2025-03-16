@@ -6,25 +6,23 @@
 /*   By: seerel <seerel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:35:03 by buket             #+#    #+#             */
-/*   Updated: 2025/03/12 16:48:35 by seerel           ###   ########.fr       */
+/*   Updated: 2025/03/16 13:54:43 by seerel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen_modified(char *x)
+size_t	ft_strlen_modif(char *x)
 {
 	size_t	i;
 
 	i = 0;
 	while (x[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
-char	*ft_strjoin_modified(char *line, char *buff)
+char	*ft_strjoin_modif(char *line, char *buff)
 {
 	size_t	i;
 	size_t	j;
@@ -35,7 +33,8 @@ char	*ft_strjoin_modified(char *line, char *buff)
 		line = (char *)malloc(1 * sizeof(char));
 		line[0] = '\0';
 	}
-	str = malloc(sizeof(char) * ((ft_strlen_modified(line) + ft_strlen_modified(buff)) + 1));
+	str = malloc(sizeof(char)
+			*((ft_strlen_modif(line) + ft_strlen_modif(buff)) + 1));
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -44,7 +43,7 @@ char	*ft_strjoin_modified(char *line, char *buff)
 		str[i] = line[i];
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
-	str[ft_strlen_modified(line) + ft_strlen_modified(buff)] = '\0';
+	str[ft_strlen_modif(line) + ft_strlen_modif(buff)] = '\0';
 	free(line);
 	return (str);
 }
